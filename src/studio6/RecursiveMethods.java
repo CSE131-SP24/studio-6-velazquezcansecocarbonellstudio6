@@ -12,9 +12,12 @@ public class RecursiveMethods {
 	 *         ...)
 	 */
 	public static double geometricSum(int n) {
+			// FIXME compute the geometric sum for the first n terms recursively	
+		if (n<=0) {
+			return 0; 
+		}
 		
-			// FIXME compute the geometric sum for the first n terms recursively
-			return 0;
+			return geometricSum(n-1)+Math.pow(0.5, n);	
 		
 	}
 
@@ -28,12 +31,14 @@ public class RecursiveMethods {
 	 */
 	public static int gcd(int p, int q) {
 		
+		if (p%q==0) {
+			return q; 
+		}
 			// FIXME compute the gcd of p and q using recursion
-			return 0;
 		
+		return gcd(q, p%q);
 	}
 
-	
 
 	/**
 	 * This method uses recursion to create a reverse of the given array
@@ -41,12 +46,28 @@ public class RecursiveMethods {
 	 * @param array the array to create a reverse of, not to be mutated
 	 * @return an array with the same data as the input but it reverse order
 	 */
-	public static int[] toReversed(int[] array) {
+	public static int[] toReversed(int[] array, int index) {
+		if (array.length<=1) {
+			return array; 
+		}
 		
-			// FIXME create a helper method that can recursively reverse the given array
-			return new int[0];
+		else {
+			return toReversedHelper(array, index);
+		}
 		
 	}
+	
+	public static int[] toReversedHelper(int[] array, int index) {
+		int temp = array[index]; 
+		int lastIndex = array.length - 1;
+		int mirrorIndex = lastIndex - index;
+		array[index] = array[mirrorIndex];
+		array[mirrorIndex] = temp;
+		
+		return toReversed(array, 0);
+			
+	}
+	
 
 	/**
 	 * @param xCenter                       x-coordinate of the center of the circle
